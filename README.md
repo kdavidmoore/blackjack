@@ -1,2 +1,4 @@
 # Blackjack
-A blackjack game created using HTML, CSS, and jQuery.
+
+## A blackjack game created using HTML, CSS, and jQuery.
+
