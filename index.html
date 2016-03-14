@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blackjack</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="the-table col-sm-8 col-sm-offset-2">
+          <div class="row">
+            <div class="dealer-hand-wrapper col-sm-12">
+              <div class="dealer-total-wrapper col-sm-2">Dealer Total<span class="dealer-total">0</span>
+              </div>
+                <div id="dealer-card-one" class="card empty col-sm-2">-</div>
+                <div id="dealer-card-two" class="card empty col-sm-2">-</div>
+                <div id="dealer-card-three" class="card empty col-sm-2">-</div>
+                <div id="dealer-card-four" class="card empty col-sm-2">-</div>
+                <div id="dealer-card-five" class="card empty col-sm-2">-</div>
+                <div id="dealer-card-six" class="card empty col-sm-2">-</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="player-hand-wrapper col-sm-12">
+              <div class="player-total-wrapper col-sm-2">Player Total<span class="player-total">0</span>
+              </div>
+                <div id="player-card-one" class="card empty col-sm-2">-</div>
+                <div id="player-card-two" class="card empty col-sm-2">-</div>
+                <div id="player-card-three" class="card empty col-sm-2">-</div>
+                <div id="player-card-four" class="card empty col-sm-2">-</div>
+                <div id="player-card-five" class="card empty col-sm-2">-</div>
+                <div id="player-card-six" class="card empty col-sm-2">-</div>
+            </div>
+          </div>
+          <div class="row action-buttons">
+            <div class="col-sm-2 col-sm-offset-2">
+              <button id="deal-button">Deal</button>
+            </div>
+            <div class="col-sm-2 col-sm-offset-1">
+              <button id="draw-button">Hit</button>
+            </div>
+            <div class="col-sm-2 col-sm-offset-1">
+              <button id="draw-button">Stand</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- blackjack scripts -->
+    <script type="text/javascript" src="scripts.js"></script>
+  </body>
+</html>

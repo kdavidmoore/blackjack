@@ -1,0 +1,5 @@
+Set up the action buttons
+Add JS
+	1. setup deal
+	2.
+	3. 
