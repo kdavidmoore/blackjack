@@ -1,6 +1,6 @@
 .the-table {
-	background-color: green;
-	border: 5px solid purple;
+	background-color: #2e8573;
+	border: 5px solid #663300;
 	border-radius: 10px;
 	margin-top: 20px;
 	padding: 20px 0px;
@@ -20,20 +20,30 @@
 	background-color: white;
 	height: 120px;
 	box-sizing: border-box;
-	border: solid 5px green;
+	border: solid 5px #2e8573;
 }
 
 .card.empty {
 	background: #ddd;
 }
 
+.action-buttons {
+	padding-top: 10px;
+}
+
 .action-buttons button {
 	width: 100%;
 	background-color: #0f0f0f;
 	color: white;
+	border-radius: 50%;
+	outline: none;
+	font-size: 1.2em;
 }
 
 #message {
-	color: white;
-	font-size: 1.2em;
+	padding-top: 10px;
+	color: black;
+	font-size: 1.5em;
+	font-weight: bold;
+	font-family: Cursive, serif;
 }
