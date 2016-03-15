@@ -47,3 +47,11 @@
 	font-weight: bold;
 	font-family: Cursive, serif;
 }
+
+.seeingRed {
+	color: red;
+}
+
+.fadeToBlack {
+	color: black;
+}

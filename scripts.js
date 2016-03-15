@@ -49,7 +49,7 @@ function deal() {
 function placeCard(card, who, slot) {
 	var currID = '#' + who + '-card-' + slot;
 	$(currID).removeClass('empty');
-	$(currID).html(card);
+	$(currID).html(card.slice(0, -1));
 	if (card.slice(0,2) == '1s' || card.slice(0,2) == '1h' || card.slice(0,2) == '1d' || card.slice(0,2) == '1c') {
 		$(currID).html('A' + card.slice(1,2));
 	}
@@ -62,13 +62,20 @@ function placeCard(card, who, slot) {
 	else if (card.slice(0,2) == '11') {
 		$(currID).html('J' + card.slice(2,3));
 	}
+	if (card.slice(-1) == 'r') {
+		// make color red
+		$(currID).addClass('seeingRed');
+	} else if (card.slice(-1) == 'b') {
+		// make color black
+		$(currID).addClass('fadeToBlack');
+	}
 }
 
 function calculateTotal(hand, who) {
 	var total = 0;
 	var cardValue = 0;
 	for (i = 0; i < hand.length; i++) {
-		cardValue = Number(hand[i].slice(0, -1)); // does not include the suit
+		cardValue = Number(hand[i].slice(0, -2)); // does not include the suit or color
 		total += cardValue;
 	}
 	// update the HTML
@@ -80,23 +87,34 @@ function calculateTotal(hand, who) {
 }
 
 function shuffleDeck() {
+	/* function Card(color, number, suit) {
+		this.color = color;
+		this.number = number;
+		this.suit = suit;
+	} */
 	// deck is made of 52 cards and 4 suits (h, s, d, c)
-	// s = 1 is hearts, s = 2 is spades, s = 3 is diamonds, s = 4 is clubs
-	// outer loop creates 4 suits
+	// s = 1 is hearts (red), s = 2 is spades (black), s = 3 is diamonds (red), s = 4 is clubs (black)
+	// outer loop creates 4 suits, either red or black
 	for (s = 1; s <= 4; s++) {
-		var suit = "";
+		var suit = '';
+		var color = '';
 		if (s === 1){
 			suit = 'h';
+			color = 'r';
 		} else if (s === 2) {
 			suit = 's';
+			color = 'b';
 		} else if (s === 3) {
 			suit = 'd';
+			color = 'r';
 		} else if (s === 4) {
 			suit = 'c';
+			color = 'b';
 		}
 		// inner loop creates 13 cards for each suit
 		for (i = 1; i <= 13; i++) {
-			theDeck.push(i + suit);
+			/* theDeck[i] = new Card(color, i, suit); */
+			theDeck.push(i + suit + color);
 		}
 	}
 	// shuffling the deck
