@@ -39,8 +39,10 @@ function deal() {
 		placeCard(playerHand[1], 'player', 'two'); }, 3000);
 	setInterval(function(){
 		placeCard(dealerHand[1], 'dealer', 'two'); }, 3000);
-	calculateTotal(playerHand, 'player');
-	calculateTotal(dealerHand, 'dealer');
+	setInterval(function(){
+		calculateTotal(playerHand, 'player'); }, 3000);
+	setInterval(function(){
+		calculateTotal(dealerHand, 'dealer'); }, 3000);
 	checkWinOnDeal();
 }
 
@@ -63,7 +65,6 @@ function placeCard(card, who, slot) {
 }
 
 function calculateTotal(hand, who) {
-	
 	var total = 0;
 	var cardValue = 0;
 	for (i = 0; i < hand.length; i++) {
