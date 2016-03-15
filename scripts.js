@@ -18,17 +18,27 @@ $(document).ready(function() {
 });
 
 function deal() {
+	// clear the table
+	theDeck = [];
+	playerHand = [];
+	dealerHand = [];
+	placeInDeck = 0;
+	$('#player-total').html('0');
+	$('#dealer-total').html('0');
+	$('button').prop('disabled', false);
+	$('#message').html('');
+	$('.card').addClass('empty');
+	// shuffle the deck and deal the first two cards
 	shuffleDeck();
 	playerHand = [ theDeck[0], theDeck[2] ];
 	dealerHand = [ theDeck[1], theDeck[3] ];
 	placeInDeck = 4; 
-	setInterval(function(){
-		<!-- place cards -->
-	});
 	placeCard(playerHand[0], 'player', 'one');
 	placeCard(dealerHand[0], 'dealer', 'one');
-	placeCard(playerHand[1], 'player', 'two');
-	placeCard(dealerHand[1], 'dealer', 'two');
+	setInterval(function(){
+		placeCard(playerHand[1], 'player', 'two'); }, 3000);
+	setInterval(function(){
+		placeCard(dealerHand[1], 'dealer', 'two'); }, 3000);
 	calculateTotal(playerHand, 'player');
 	calculateTotal(dealerHand, 'dealer');
 	checkWinOnDeal();
@@ -53,6 +63,7 @@ function placeCard(card, who, slot) {
 }
 
 function calculateTotal(hand, who) {
+	
 	var total = 0;
 	var cardValue = 0;
 	for (i = 0; i < hand.length; i++) {
@@ -62,7 +73,6 @@ function calculateTotal(hand, who) {
 	// update the HTML
 	var idToGet = '.' + who + '-total';
 	$(idToGet).html(total);
-
 	if (total > 21){
 		bust(who);
 	}
@@ -130,7 +140,8 @@ function stand(){
 		} else if (dealerHand.length == 5) {
 			slot = "six";
 		}
-		placeCard(theDeck[placeInDeck], 'dealer', slot);
+		setInterval(function(){ 
+			placeCard(theDeck[placeInDeck], 'dealer', slot); }, 3000);
 		dealerHand.push(theDeck[placeInDeck]);
 		placeInDeck++;
 		calculateTotal(dealerHand, 'dealer');
@@ -149,12 +160,15 @@ function checkWin() {
 		if (playerHas > dealerHas) {
 			// player won
 			$('#message').html('You beat the dealer!');
+			gameOver();
 		} else if (playerHas < dealerHas) {
 			// dealer won
 			$('#message').html('Alas, you lost to the dealer.');
+			gameOver();
 		} else {
 			// it's a tie
 			$('#message').html('It\'s a push!');
+			gameOver();
 		}
 	}
 }
@@ -168,18 +182,27 @@ function checkWinOnDeal() {
 		bust('dealer');
 	} else if (playerHas == 21 && dealerHas < 21) {
 		$('#message').html('You beat the dealer with a blackjack!');
+		gameOver();
 	} else if (playerHas > 21 && dealerHas < 21) {
 		bust('player');
 	} else if (playerHas == 21 && dealerHas == 21) {
 		$('#message').html('It\'s a push!');
+		gameOver();
 	}
 }
 
 function bust(who) {
 	if (who === 'player') {
 		$('#message').html('You have busted!');
+		gameOver();
 	} else {
 		// it must be the dealer
 		$('#message').html('The dealer has busted!');
+		gameOver();
 	}
+}
+
+function gameOver() {
+	$('button').prop('disabled', true);
+	$('#deal-button').prop('disabled', false);
 }
