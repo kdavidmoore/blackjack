@@ -22,13 +22,16 @@ function deal() {
 	playerHand = [ theDeck[0], theDeck[2] ];
 	dealerHand = [ theDeck[1], theDeck[3] ];
 	placeInDeck = 4; 
+	setInterval(function(){
+		<!-- place cards -->
+	});
 	placeCard(playerHand[0], 'player', 'one');
 	placeCard(dealerHand[0], 'dealer', 'one');
 	placeCard(playerHand[1], 'player', 'two');
 	placeCard(dealerHand[1], 'dealer', 'two');
 	calculateTotal(playerHand, 'player');
 	calculateTotal(dealerHand, 'dealer');
-	// can check for bust here
+	checkWinOnDeal();
 }
 
 function placeCard(card, who, slot) {
@@ -60,9 +63,8 @@ function calculateTotal(hand, who) {
 	var idToGet = '.' + who + '-total';
 	$(idToGet).html(total);
 
-	// if total > 21, check for 'bust'
-	if (total > 21) {
-		bust(whosTurn);
+	if (total > 21){
+		bust(who);
 	}
 }
 
@@ -97,7 +99,6 @@ function shuffleDeck() {
 			theDeck[card2] = temp;
 		}
 	}
-	console.log(theDeck);
 }
 
 function hit() {
@@ -113,13 +114,13 @@ function hit() {
 	}
 	placeCard(theDeck[placeInDeck], 'player', slot);
 	playerHand.push(theDeck[placeInDeck]);
-	placeInDeck++;
 	calculateTotal(playerHand, 'player');
+	placeInDeck++;
 }
 
 function stand(){
-	var dealerTotal = $('.dealer-total').html();
-	while(dealerTotal < 17) {
+	var dealerHas = $('.dealer-total').html();
+	while(dealerHas < 17) {
 		if (dealerHand.length == 2) {
 			slot = "three";
 		} else if (dealerHand.length == 3) {
@@ -133,7 +134,7 @@ function stand(){
 		dealerHand.push(theDeck[placeInDeck]);
 		placeInDeck++;
 		calculateTotal(dealerHand, 'dealer');
-		dealerTotal = $('.dealer-total').html();
+		dealerHas = $('.dealer-total').html();
 	}
 	checkWin();
 }
@@ -141,10 +142,9 @@ function stand(){
 function checkWin() {
 	var playerHas = Number($('.player-total').html());
 	var dealerHas = Number($('.dealer-total').html());
-	if (dealerHas > 21) {
-		// the dealer has busted
+	if (dealerHas > 21 && playerHas < 21) {
 		bust('dealer');
-	} else {
+	} else if (dealerHas > 16) {
 		// neither player has busted and the dealer has at least 17
 		if (playerHas > dealerHas) {
 			// player won
@@ -159,10 +159,27 @@ function checkWin() {
 	}
 }
 
+function checkWinOnDeal() {
+	var playerHas = Number($('.player-total').html());
+	var dealerHas = Number($('.dealer-total').html());
+	console.log("Dealer has " + dealerHas);
+	console.log("Player has " + playerHas);
+	if (dealerHas > 21 && playerHas < 21) {
+		bust('dealer');
+	} else if (playerHas == 21 && dealerHas < 21) {
+		$('#message').html('You beat the dealer with a blackjack!');
+	} else if (playerHas > 21 && dealerHas < 21) {
+		bust('player');
+	} else if (playerHas == 21 && dealerHas == 21) {
+		$('#message').html('It\'s a push!');
+	}
+}
+
 function bust(who) {
 	if (who === 'player') {
 		$('#message').html('You have busted!');
 	} else {
+		// it must be the dealer
 		$('#message').html('The dealer has busted!');
 	}
 }
