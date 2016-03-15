@@ -20,6 +20,9 @@
 	background-color: white;
 	height: 120px;
 	box-sizing: border-box;
+	font-weight: bold;
+	font-size: 1.2em;
+	font-family: times, serif;
 	border: solid 5px #2e8573;
 }
 
@@ -54,4 +57,19 @@
 
 .fadeToBlack {
 	color: black;
+}
+
+.numberLabel {
+	float: left;
+	position: relative;
+	top: 0px;
+	left: -26px;
+}
+
+.suitImg {
+	float: left;
+	position: relative;
+	height: 20px;
+	top: 28px;
+	left: -12px;
 }

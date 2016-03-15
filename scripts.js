@@ -49,25 +49,34 @@ function deal() {
 function placeCard(card, who, slot) {
 	var currID = '#' + who + '-card-' + slot;
 	$(currID).removeClass('empty');
-	$(currID).html(card.slice(0, -1));
-	if (card.slice(0,2) == '1s' || card.slice(0,2) == '1h' || card.slice(0,2) == '1d' || card.slice(0,2) == '1c') {
-		$(currID).html('A' + card.slice(1,2));
+	$(currID).html('<span class="numberLabel">' + card.slice(0, -2) + '</span>');
+	if (card.slice(0,2) === '1s' || card.slice(0,2) === '1h' || card.slice(0,2) === '1d' || card.slice(0,2) === '1c') {
+		$(currID).html('<span class="numberLabel">' + 'A' + '</span>');
 	}
-	else if (card.slice(0,2) == '13') {
-		$(currID).html('K' + card.slice(2,3));
+	else if (card.slice(0,2) === '13') {
+		$(currID).html('<span class="numberLabel">' + 'K' + '</span>');
 	}
-	else if (card.slice(0,2) == '12') {
-		$(currID).html('Q' + card.slice(2,3));
+	else if (card.slice(0,2) === '12') {
+		$(currID).html('<span class="numberLabel">' + 'Q' + '</span>');
 	}
-	else if (card.slice(0,2) == '11') {
-		$(currID).html('J' + card.slice(2,3));
+	else if (card.slice(0,2) === '11') {
+		$(currID).html('<span class="numberLabel">' + 'J' + '</span>');
 	}
-	if (card.slice(-1) == 'r') {
+	if (card.slice(-1) === 'r') {
 		// make color red
 		$(currID).addClass('seeingRed');
-	} else if (card.slice(-1) == 'b') {
+	} else if (card.slice(-1) === 'b') {
 		// make color black
 		$(currID).addClass('fadeToBlack');
+	}
+	if (card.slice(-2,-1) === 's') {
+		$(currID).prepend('<img class="suitImg" src="img/spades.svg">');
+	} else if (card.slice(-2,-1) === 'h') {
+		$(currID).prepend('<img class="suitImg" src="img/hearts.svg">');
+	} else if (card.slice(-2,-1) === 'd') {
+		$(currID).prepend('<img class="suitImg" src="img/diamonds.svg">');
+	} else if (card.slice(-2,-1) === 'c') {
+		$(currID).prepend('<img class="suitImg" src="img/clubs.svg">');
 	}
 }
 
